@@ -9,19 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.client = void 0;
 const discord_js_1 = require("discord.js");
 const app_1 = require("../app");
 const Intents_1 = require("../Intents/Intents");
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
-const client = new discord_js_1.Client({ intents: Intents_1.intents });
-client.on('ready', () => {
+exports.client = new discord_js_1.Client({ intents: Intents_1.intents });
+exports.client.on('ready', () => {
     var _a;
-    console.log(`The Bot has been disturbed by ${(_a = client.user) === null || _a === void 0 ? void 0 : _a.tag}`);
+    console.log(`The Bot has been disturbed by ${(_a = exports.client.user) === null || _a === void 0 ? void 0 : _a.tag}`);
 });
-client.on('messageCreate', (msg) => __awaiter(void 0, void 0, void 0, function* () {
+exports.client.on('messageCreate', (msg) => __awaiter(void 0, void 0, void 0, function* () {
     if (!msg.author.bot) {
-        console.log('Message', msg.content);
         msg.reply('Hello');
         try {
             const user = msg.author;
@@ -34,4 +34,4 @@ client.on('messageCreate', (msg) => __awaiter(void 0, void 0, void 0, function* 
     }
 }));
 (0, app_1.runServer)();
-client.login(process.env.DISCORD_TOKEN);
+exports.client.login(process.env.DISCORD_TOKEN);

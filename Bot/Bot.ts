@@ -3,7 +3,7 @@ import { runServer } from '../app'
 import { intents } from '../Intents/Intents'
 import { config } from 'dotenv'
 config()
-const client:Client = new Client({intents})
+export const client:Client = new Client({intents})
 
 
 client.on('ready',()=>{
