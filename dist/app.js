@@ -14,7 +14,9 @@ app.get('/authorize/login', (req, res) => {
     res.redirect('https://discord-auth-7rvh.onrender.com/auth/discord');
 });
 app.get('/home/dashboard', (req, res) => {
-    res.send('test').status(200);
+    console.log(req);
+    //@ts-ignore
+    res.send(req.user).status(200);
 });
 app.all('/', (req, res) => {
     res.send('Working');

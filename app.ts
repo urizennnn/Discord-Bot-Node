@@ -13,9 +13,24 @@ app.use(morgan('dev'))
 app.get('/authorize/login',(req:Request,res:Response)=>{
 res.redirect('https://discord-auth-7rvh.onrender.com/auth/discord')
 })
-app.get('/home/dashboard',(req:Request,res:Response)=>{
-  res.send('test').status(200)
-})
+app.get('/home/dashboard', (req: Request, res: Response) => {
+  try {
+    const base64String = req.query.user as string; 
+    if (!base64String) {
+      return res.status(400).send('Bad Request: Missing user parameter');
+    }
+
+    const decodedData = Buffer.from(base64String, 'base64').toString('utf-8');
+
+    console.log(decodedData);
+
+    res.send(decodedData).status(200);
+  } catch (error) {
+    console.error('Error decoding Base64 string:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 app.all('/', (req: Request, res: Response) => {
   res.send('Working');
