@@ -13,8 +13,8 @@ app.use(morgan('dev'))
 app.get('/authorize/login',(req:Request,res:Response)=>{
 res.redirect('https://discord-auth-7rvh.onrender.com/auth/discord')
 })
-app.get('/home/dashoad',(req:Request,res:Response)=>{
-  res.send(req.user).status(200)
+app.get('/home/dashboard',(req:Request,res:Response)=>{
+  res.send('test').status(200)
 })
 
 app.all('/', (req: Request, res: Response) => {
