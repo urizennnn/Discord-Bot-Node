@@ -1,21 +1,23 @@
-import express from 'express';
-import { Request, Response } from 'express';
-import path from 'path'; 
+//@ts-ignore
+import express from 'express'
+//@ts-ignore
+import {Request,Response} from 'express'
+const morgan = require('morgan')
+
+
 
 const app = express();
-const PORT: (string | number) = process.env.PORT || 3000;
+const PORT:(string | number) = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
-app.use(express.static('./public'));
+app.use(morgan('dev'))
+app.get('/authorize/login',(req:Request,res:Response)=>{
+res.redirect('https://discord-auth-7rvh.onrender.com/auth/discord')
+})
 
 app.all('/', (req: Request, res: Response) => {
   res.send('Working');
 });
 
-app.get('/test-auth', (req: Request, res: Response) => {
-  const filePath = path.join(__dirname, 'public', 'html', 'Auth.discord.ejs');
-  res.sendFile(filePath);
-});
 
 export function runServer() {
   app.listen(PORT, () => {

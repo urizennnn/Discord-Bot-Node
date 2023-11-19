@@ -4,18 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runServer = void 0;
+//@ts-ignore
 const express_1 = __importDefault(require("express"));
-const path_1 = __importDefault(require("path"));
+const morgan = require('morgan');
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
-app.set('view engine', 'ejs');
-app.use(express_1.default.static('./public'));
+app.use(morgan('dev'));
+app.get('/authorize/login', (req, res) => {
+    res.redirect('https://discord-auth-7rvh.onrender.com/auth/discord');
+});
 app.all('/', (req, res) => {
     res.send('Working');
-});
-app.get('/test-auth', (req, res) => {
-    const filePath = path_1.default.join(__dirname, 'public', 'html', 'Auth.discord.ejs');
-    res.sendFile(filePath);
 });
 function runServer() {
     app.listen(PORT, () => {
